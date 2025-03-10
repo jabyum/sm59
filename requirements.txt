@@ -2,4 +2,5 @@ sqlalchemy
 fastapi
 uvicorn
 python-multipart
+pytz
 # pip install -r requirements.txt
