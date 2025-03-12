@@ -11,7 +11,7 @@ def add_user_db(username, phone_number, email, password, city=None, birthday=Non
         check = db.query(User).filter_by(username=username).all()
         if check:
             return {'status': 0, 'message': 'This username is already used'}
-        new_user = User(name=username, phone_number=phone_number, email=email, password=password, city=city,
+        new_user = User(username=username, phone_number=phone_number, email=email, password=password, city=city,
                         birthday=birthday)
         db.add(new_user)
         db.commit()
@@ -31,7 +31,7 @@ def add_user_db2(username, phone_number, email, password, city=None, birthday=No
         text += "\nis/are already used"
         if phone or email or name:
             return {'status': 0, 'message': text}
-        new_user = User(name=username, phone_number=phone_number, email=email, password=password, city=city,
+        new_user = User(username=username, phone_number=phone_number, email=email, password=password, city=city,
                         birthday=birthday)
         db.add(new_user)
         db.commit()
@@ -40,7 +40,7 @@ def add_user_db2(username, phone_number, email, password, city=None, birthday=No
 
 def login_db(name, ph_number, password, email):
     db = next(get_db())
-    check = db.query(User).filter_by(name=name).first()
+    check = db.query(User).filter_by(username=name).first()
     if not check:
         check = db.query(User).filter_by(phone_number=ph_number).first()
         if not check:
