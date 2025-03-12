@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
 from pydantic import BaseModel, constr
 import re
 from database.userservice import *
@@ -25,4 +25,9 @@ async def registration(user_model: User):
         return {"status":0, "message": "неправильный формат почты"}
     result = add_user_db(**data)
     return {"status": 1, "message": result}
-
+# не будет отображаться форма в свагере так как использован Request
+@user_router.post("/login")
+async def login(request: Request):
+    data = await request.json()
+    result = login_db(**data)
+    return {"status": 1, "message": result}

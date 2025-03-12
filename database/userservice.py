@@ -38,14 +38,15 @@ def add_user_db2(username, phone_number, email, password, city=None, birthday=No
         return new_user.id
 
 
-def login_db(name, ph_number, password, email):
+def login_db(login, password):
     db = next(get_db())
-    check = db.query(User).filter_by(username=name).first()
+    check = db.query(User).filter_by(username=login).first()
     if not check:
-        check = db.query(User).filter_by(phone_number=ph_number).first()
+        check = db.query(User).filter_by(phone_number=login).first()
         if not check:
-            check = db.query(User).filter_by(email=email).first()
+            check = db.query(User).filter_by(email=login).first()
             if not check:
                 return {'status':0, 'message': 'failed'}
     if check.password == password:
         return {'status':1, 'message': check.id}
+# функция изменения информации
