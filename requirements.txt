@@ -3,4 +3,5 @@ fastapi
 uvicorn
 python-multipart
 pytz
+regex
 # pip install -r requirements.txt
